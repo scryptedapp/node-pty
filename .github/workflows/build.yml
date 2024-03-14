@@ -4,13 +4,14 @@ permissions:
   contents: write
 
 on:
+  create:
   workflow_dispatch:
     inputs:
       uploadAssets:
         description: 'Upload Assets'
         type: boolean
         required: false
-        default: false
+        default: true
 
 jobs:
   build:
