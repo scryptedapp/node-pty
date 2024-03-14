@@ -2,6 +2,11 @@ name: Build
 
 on:
   workflow_dispatch:
+    inputs:
+      uploadAssets:
+        description: 'Upload Assets'
+        required: false
+        default: 'false'
 
 jobs:
   build:
@@ -24,5 +29,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 20.x
+
     - run: npm install
+
     - run: npm run prebuildify-${{ matrix.os }}
+
+    - run: npm run prebuildify-upload
+      if: ${{ github.event.inputs.uploadAssets == 'true' }}
