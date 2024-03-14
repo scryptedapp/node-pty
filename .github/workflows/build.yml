@@ -5,8 +5,9 @@ on:
     inputs:
       uploadAssets:
         description: 'Upload Assets'
+        type: boolean
         required: false
-        default: 'false'
+        default: false
 
 jobs:
   build:
@@ -35,4 +36,4 @@ jobs:
     - run: npm run prebuildify-${{ matrix.os }}
 
     - run: npm run prebuildify-upload
-      if: ${{ github.event.inputs.uploadAssets == 'true' }}
+      if: ${{ github.event.inputs.uploadAssets == true }}
