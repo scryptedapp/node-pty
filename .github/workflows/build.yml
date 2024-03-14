@@ -13,6 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        # node-gyp doesn't work on python 3.12 due to missing distutils on mac and windows.
+        python-version: 3.10
+
     - name: Use Node.js 20.x
       uses: actions/setup-node@v1
       with:
