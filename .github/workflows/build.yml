@@ -35,5 +35,5 @@ jobs:
 
     - run: npm run prebuildify-${{ matrix.os }}
 
-    - run: npm run prebuildify-upload
+    - run: npm run prebuildify-upload -- ${{ secrets.GITHUB_TOKEN }}
       if: ${{ github.event.inputs.uploadAssets == true }}
