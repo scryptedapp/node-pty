@@ -5,6 +5,8 @@ permissions:
 
 on:
   create:
+    tags:
+      - v*
   workflow_dispatch:
     inputs:
       uploadAssets:
