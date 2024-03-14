@@ -33,8 +33,9 @@
     "openpty"
   ],
   "scripts": {
+    "prebuildify-host": "prebuild --strip --include-regex '\\.node$|spawn-helper$|\\.exe$|\\.dll$|\\.pdb$'",
     "prebuildify-node": "prebuild --strip -t 18.0.0 -t 19.0.0 -t 20.0.0 -t 21.0.0 --include-regex '\\.node$|spawn-helper$|\\.exe$|\\.dll$|\\.pdb$'",
-    "prebuildify-electron": "prebuild --strip -r electron -t 28.0.0 -t 29.0.0",
+    "prebuildify-electron": "prebuild --strip -r electron -t 28.0.0 -t 29.0.0 --include-regex '\\.node$|spawn-helper$|\\.exe$|\\.dll$|\\.pdb$'",
     "prebuildify-arm64": "npm run prebuildify-electron -- --arch arm64 && npm run prebuildify-node -- --arch arm64",
     "prebuildify-x64": "npm run prebuildify-electron -- --arch x64 && npm run prebuildify-node -- --arch x64",
     "prebuildify": "npm run prebuildify-arm64 && npm run prebuildify-x64",
