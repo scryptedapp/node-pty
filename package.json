@@ -49,7 +49,7 @@
     "lint": "eslint -c .eslintrc.js --ext .ts src/",
     "prebuild-install": "prebuild-install",
     "node-gyp-rebuild": "node-gyp rebuild",
-    "install": "npm run prebuild-install || node-gyp rebuild",
+    "install": "prebuild-install || node-gyp rebuild",
     "postinstall": "node scripts/post-install.js",
     "test": "cross-env NODE_ENV=test mocha -R spec --exit lib/*.test.js",
     "posttest": "npm run lint",
