@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
         # node-gyp doesn't work on python 3.12 due to missing distutils on mac and windows.
