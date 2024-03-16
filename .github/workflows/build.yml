@@ -4,9 +4,9 @@ permissions:
   contents: write
 
 on:
-  create:
+  push:
     tags:
-      - v*
+      - '*'
   workflow_dispatch:
     inputs:
       uploadAssets:
