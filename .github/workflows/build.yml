@@ -14,6 +14,7 @@ on:
         type: boolean
         required: false
         default: true
+  pull_request:
 
 jobs:
   build_linux:
@@ -47,7 +48,7 @@ jobs:
     - run: npm run prebuildify-${{ matrix.os }}
 
     - run: npm run prebuildify-upload -- ${{ secrets.GITHUB_TOKEN }}
-      if: ${{ github.event.inputs.uploadAssets != 'false' }}
+      if: ${{ github.event_name != 'pull_request' && github.event.inputs.uploadAssets != 'false' }}
 
   build_other:
     strategy:
@@ -75,4 +76,4 @@ jobs:
     - run: npm run prebuildify-${{ matrix.os }}
 
     - run: npm run prebuildify-upload -- ${{ secrets.GITHUB_TOKEN }}
-      if: ${{ github.event.inputs.uploadAssets != 'false' }}
+      if: ${{ github.event_name != 'pull_request' && github.event.inputs.uploadAssets != 'false' }}
