@@ -4,7 +4,7 @@
   "author": {
     "name": "Microsoft Corporation"
   },
-  "version": "1.0.12",
+  "version": "1.0.14",
   "license": "MIT",
   "main": "./lib/index.js",
   "types": "./typings/node-pty.d.ts",
@@ -73,6 +73,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@scrypted/prebuild-install": "^7.1.8"
+    "prebuild-install": "npm:@scrypted/prebuild-install@^7.1.8"
   }
 }
