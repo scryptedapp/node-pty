@@ -14,14 +14,17 @@ on:
         type: boolean
         required: false
         default: true
+  pull_request:
 
 jobs:
-  build:
+  build_linux:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest, self-hosted-arm64]
+        os: [ubuntu-latest, self-hosted-arm64]
 
     runs-on: ${{ matrix.os }}
+    container:
+      image: ubuntu:20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -45,4 +48,32 @@ jobs:
     - run: npm run prebuildify-${{ matrix.os }}
 
     - run: npm run prebuildify-upload -- ${{ secrets.GITHUB_TOKEN }}
-      if: ${{ github.event.inputs.uploadAssets != 'false' }}
+      if: ${{ github.event_name != 'pull_request' && github.event.inputs.uploadAssets != 'false' }}
+
+  build_other:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        # node-gyp doesn't work on python 3.12 due to missing distutils on mac and windows.
+        python-version: '3.10'
+
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 20.x
+
+    - run: npm install
+
+    - run: npm run prebuildify-${{ matrix.os }}
+
+    - run: npm run prebuildify-upload -- ${{ secrets.GITHUB_TOKEN }}
+      if: ${{ github.event_name != 'pull_request' && github.event.inputs.uploadAssets != 'false' }}
