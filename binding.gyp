@@ -1,6 +1,6 @@
 {
   'target_defaults': {
-    "cflags": ["-std=c++20"],
+    "cflags": ["-std=c++17"],
     'dependencies': [
       "<!(node -p \"require('node-addon-api').targets\"):node_addon_api_except",
     ],
